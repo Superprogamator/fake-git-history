@@ -1,0 +1,22 @@
+name: Generate Fake Commits (Manual)
+
+on:
+  workflow_dispatch:  # Isso permite que o workflow seja executado manualmente
+
+jobs:
+  generate-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Generate Fake Commit
+        run: |
+          echo "$(date)" >> commit.txt
+          git config --global user.name "SeuNomeDeUsuario"
+          git config --global user.email "SeuEmailDeUsuario@example.com"
+          git add commit.txt
+          git commit -m "Commit on $(date)"
+          git push
+
