@@ -11,12 +11,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Generate Fake Commit
+      - name: Generate Fake Commits for 120 Days
         run: |
-          echo "$(date)" >> commit.txt
-          git config --global user.name "SeuNomeDeUsuario"
-          git config --global user.email "SeuEmailDeUsuario@example.com"
-          git add commit.txt
-          git commit -m "Commit on $(date)"
-          git push
+          # Loop para gerar 120 commits
+          for i in {1..120}; do
+            # Criar um commit em um dia diferente
+            echo "Fake commit for day $i" >> commit.txt
+            git config --global user.name "Superprogamator"
+            git config --global user.email "Superprogamator@example.com"
+            git add commit.txt
+            git commit -m "Commit on Day $i"
+            git push
+            # Aguarda 24 horas para o próximo commit
+            sleep 86400
+          done
+
 
